@@ -116,6 +116,22 @@
             position: relative;
         }
 
+        .dragtext{
+            text-align: center;
+            color: var(--white);
+            font-size: 2rem;
+            font-weight: 300;
+            opacity: 0.8;
+        
+          
+            margin-top: 2px;
+        }
+
+        .dragtext:hover{
+            opacity: 1;
+            scale: 1.05;
+        }
+
         #mbappe {
             max-width: 25rem;
             height: auto;
@@ -125,7 +141,7 @@
             z-index: 2;
         }
 
-        .fc-cards-container {
+       .fc-cards-container {
             display: flex;
             justify-content: center;
             gap: 2rem;
@@ -139,12 +155,22 @@
             height: auto;
             border-radius: 1rem;
             transition: var(--transition-standard);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: move; 
+            touch-action: none;
+            user-select: none;
         }
 
         .fc-cards:hover {
             transform: translateY(-0.5rem);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .fc-cards.dragging {
+            opacity: 0.5;
+            transform: scale(1.05);
+        }
+
+        .fc-cards.over {
+            border: 2px dashed var(--primary-lightblue);
         }
 
         .title {
@@ -153,9 +179,26 @@
             font-size: 3.5rem;
             font-weight: 900;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+          
             margin-top: 0;
         }
+
+        .title:hover {
+            position: relative;
+            color: var(--red);
+            animation: glitch 0.8s infinite;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 1px 1px var(--primary-lightblue); }
+            20% { text-shadow: -1px -1px var(--red); }
+            40% { text-shadow: 1px -1px var(--primary-darkblue); }
+            60% { text-shadow: -1px 1px var(--white); }
+            80% { text-shadow: 1px 1px var(--red); }
+            100% { text-shadow: none; }
+        }
+
+
 
         .subtitle {
             text-align: center;
@@ -163,8 +206,20 @@
             font-size: 1.5rem;
             font-weight: 400;
             margin-bottom: 2rem;
-            max-width: 600px;
+            max-width: 37.5rem;
         }
+
+        .subtitle:hover {
+            animation: fadeIn 1.2s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0.4; transform: translateY(5px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+
+
 
         .build-team-btn {
             display: inline-block;
@@ -187,60 +242,159 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
-        @media (max-width: 48rem) {
-            #mbappe {
-                max-width: 15rem;
-            }
 
-            .title {
-                font-size: 2rem;
-                line-height: 2.2rem;
-                word-break: break-word;
-            }
-
-            .subtitle {
-                font-size: 1rem;
-                line-height: 1.2rem;
-                word-break: break-word;
-                
-            }
-
-            .fc-cards {
-                max-width: 12rem;
-            }
+        .download-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary-black);
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: var(--transition-standard);
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        @media (max-width: 30rem) {
-            .navbar {
-                flex-direction: column;
-                height: auto;
-                padding: 1rem;
-            }
-
-            .navlinks {
-                flex-direction: column;
-                gap: 1rem;
-                margin-top: 1rem;
-            }
-
-            title {
-                font-size: 1.5rem;
-                line-height: 1.8rem;
-                word-break: break-word;
-            }
-
-        .subtitle {
-            font-size: 0.8rem;
-            line-height: 1rem;
-            word-break: break-word;
-        }
-            
-
-            #mbappe {
-                max-width: 12rem;
-            }
+        .download-btn:hover {
+            transform: translateY(-5px);
+            scale: 1.05;
         }
 
+       @media (max-width: 48rem) {
+    .title {
+        font-size: 2.5rem;
+        line-height: 2.8rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+        line-height: 1.4rem;
+    }
+
+    .dragtext {
+        font-size: 1.5rem;
+    }
+
+    .fc-cards {
+        max-width: 12rem;
+    }
+
+    .fc-cards-container {
+        gap: 1.5rem;
+    }
+
+    .build-team-btn {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+    }
+
+    .download-btn {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+        margin: 0.5rem;
+    }
+}
+
+@media (max-width: 30rem) {
+    .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .navlinks {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-top: 1rem;
+    }
+
+    .hero-content {
+        padding: 8rem 1rem 2rem;
+    }
+
+    .title {
+        font-size: 1.8rem;
+        line-height: 2rem;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+        line-height: 1.1rem;
+    }
+
+    .dragtext {
+        font-size: 1.2rem;
+        margin-top: 1rem;
+    }
+
+    .fc-cards {
+        max-width: 10rem;
+    }
+
+    .fc-cards-container {
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .build-team-btn {
+        font-size: 0.9rem;
+        padding: 0.7rem 1.2rem;
+        margin: 0.5rem;
+    }
+
+    .download-btn {
+        font-size: 0.9rem;
+        padding: 0.7rem 1.2rem;
+        margin: 0.3rem;
+        width: 90%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 24rem) {
+    .navbar {
+        padding: 0.5rem;
+    }
+
+    #fcmobile {
+        font-size: 1.5rem;
+    }
+
+    .navlinks {
+        font-size: 0.9rem;
+    }
+
+    .title {
+        font-size: 1.5rem;
+        line-height: 1.7rem;
+    }
+
+    .subtitle {
+        font-size: 0.8rem;
+        line-height: 1rem;
+    }
+
+    .dragtext {
+        font-size: 1rem;
+    }
+
+    .fc-cards {
+        max-width: 8rem;
+    }
+
+    .build-team-btn {
+        font-size: 0.8rem;
+        padding: 0.6rem 1rem;
+    }
+
+    .download-btn {
+        font-size: 0.8rem;
+        padding: 0.6rem 1rem;
+    }
+}
         
     </style>
 </head>
@@ -257,13 +411,143 @@
     <div class="hero-content">
         <h1 class="title">WELCOME TO FC MOBILE</h1>
         <p class="subtitle">Enjoy thrilling gameplay experience of football from FC Mobile.</p>
-        <a href="#" class="build-team-btn">Build Your Team Now</a>
+        <a href="#" class="build-team-btn">Check The FEATURES OF FC MOBILE</a>
+        <h2 class="dragtext">Drag and Drop cards to change their positions</h2>
+        
         <div class="fc-cards-container">
-            <img class="fc-cards" src="C. Ronaldo_fc25_download.png" alt="Ronaldo FC CARD">
-            <img class="fc-cards" src="Cruyff_fc25_download.png" alt="Cruyff FC CARD">
-            <img class="fc-cards" src="Messi_fc25_download.png" alt="Messi FC CARD">
+            <img class="fc-cards" src="C. Ronaldo_fc25_download.png" alt="Ronaldo FC CARD" draggable="true">
+            <img class="fc-cards" src="Cruyff_fc25_download.png" alt="Cruyff FC CARD" draggable="true">
+            <img class="fc-cards" src="Messi_fc25_download.png" alt="Messi FC CARD" draggable="true">
         </div>
-        <img id="mbappe" src="mbappe.png" alt="mbappe image">
+        <a href="#" class="build-team-btn">Check the upcoming FEATURES of fc mobile</a>
+        <a href="https://apps.apple.com/us/app/ea-sports-fc-mobile-soccer/id1094930513" target="_blank" class="download-btn">GET FC MOBILE ON PLAYSTORE</a>
+        <a href="https://play.google.com/store/apps/details?id=com.ea.gp.fifamobile&pli=1" target="_blank" class="download-btn">GET FC MOBILE ON APPLE STORE</a>
     </div>
+
+
+
+       <script>
+        const cards = document.querySelectorAll('.fc-cards');
+        let draggedCard = null;
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        // Desktop Drag and Drop
+        cards.forEach(card => {
+            card.addEventListener('dragstart', handleDragStart);
+            card.addEventListener('dragover', handleDragOver);
+            card.addEventListener('dragenter', handleDragEnter);
+            card.addEventListener('dragleave', handleDragLeave);
+            card.addEventListener('drop', handleDrop);
+            card.addEventListener('dragend', handleDragEnd);
+
+            // Mobile Touch Events
+            card.addEventListener('touchstart', handleTouchStart);
+            card.addEventListener('touchmove', handleTouchMove);
+            card.addEventListener('touchend', handleTouchEnd);
+        });
+
+        function handleDragStart(e) {
+            draggedCard = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.outerHTML);
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        }
+
+        function handleDragEnter(e) {
+            e.preventDefault();
+            this.classList.add('over');
+        }
+
+        function handleDragLeave() {
+            this.classList.remove('over');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            if (draggedCard !== this) {
+                swapCards(draggedCard, this);
+            }
+            this.classList.remove('over');
+        }
+
+        function handleDragEnd() {
+            this.classList.remove('dragging');
+            draggedCard = null;
+        }
+
+        function handleTouchStart(e) {
+            e.preventDefault();
+            draggedCard = this;
+            this.classList.add('dragging');
+            const touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+
+            // Create a clone for visual feedback during drag
+            const clone = this.cloneNode(true);
+            clone.classList.add('dragging');
+            clone.style.position = 'absolute';
+            clone.style.pointerEvents = 'none';
+            clone.style.zIndex = '1000';
+            clone.style.opacity = '0.7';
+            document.body.appendChild(clone);
+            this.clone = clone;
+            updateClonePosition(clone, touch);
+        }
+
+        function handleTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            if (this.clone) {
+                updateClonePosition(this.clone, touch);
+            }
+        }
+
+        function handleTouchEnd(e) {
+            e.preventDefault();
+            this.classList.remove('dragging');
+            if (this.clone) {
+                document.body.removeChild(this.clone);
+                this.clone = null;
+            }
+
+            const touch = e.changedTouches[0];
+            const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
+            const targetCard = targetElement.closest('.fc-cards');
+
+            if (targetCard && targetCard !== draggedCard) {
+                swapCards(draggedCard, targetCard);
+            }
+            draggedCard = null;
+        }
+
+        function updateClonePosition(clone, touch) {
+            clone.style.left = `${touch.clientX - clone.offsetWidth / 2}px`;
+            clone.style.top = `${touch.clientY - clone.offsetHeight / 2}px`;
+        }
+
+        function swapCards(card1, card2) {
+            const allCards = Array.from(document.querySelectorAll('.fc-cards'));
+            const index1 = allCards.indexOf(card1);
+            const index2 = allCards.indexOf(card2);
+            const parent = card1.parentNode;
+            const nextSibling1 = card1.nextSibling;
+            const nextSibling2 = card2.nextSibling;
+
+            if (index1 < index2) {
+                parent.insertBefore(card1, nextSibling2);
+                parent.insertBefore(card2, nextSibling1);
+            } else {
+                parent.insertBefore(card2, nextSibling1);
+                parent.insertBefore(card1, nextSibling2);
+            }
+        }
+    </script>
 </body>
 </html>
