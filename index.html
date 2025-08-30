@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>FC MOBILE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --solid-black: #000000;
+            --primary-black: #020024;
+            --secondary-black: #03081C;
+            --primary-darkblue: #102782;
+            --white: #fff;
+            --primary-lightblue: #2B2DD8;
+            --red: #ff0000;
+            --transition-standard: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 100%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: linear-gradient(180deg, var(--secondary-black) 40%, var(--primary-darkblue) 100%);
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("image1.png") no-repeat center center/cover;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .navbar {
+            background: linear-gradient(30deg, var(--solid-black) 20%, var(--primary-black) 81%);
+            height: 5rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            position: fixed;
+            top: 0;
+            z-index: 10;
+        }
+
+        #fcmobile {
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        .navlinks {
+            display: flex;
+            gap: 1.2rem;
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        #fcmobile:hover {
+            transform: translateX(0.5rem);
+            scale: 1.05;
+            transition: var(--transition-standard);
+        }
+
+        .nav-link {
+            position: relative;
+            padding-bottom: 0.25rem;
+            transition: var(--transition-standard);
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--red);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 6rem 2rem 2rem;
+            position: relative;
+        }
+
+        #mbappe {
+            max-width: 25rem;
+            height: auto;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 2rem;
+            z-index: 2;
+        }
+
+        .fc-cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            padding: 0 2rem;
+        }
+
+        .fc-cards {
+            max-width: 15rem;
+            height: auto;
+            border-radius: 1rem;
+            transition: var(--transition-standard);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .fc-cards:hover {
+            transform: translateY(-0.5rem);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .title {
+            text-align: center;
+            color: var(--white);
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-top: 0;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .build-team-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--red);
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: var(--transition-standard);
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .build-team-btn:hover {
+            background: var(--primary-lightblue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 48rem) {
+            #mbappe {
+                max-width: 15rem;
+            }
+
+            .title {
+                font-size: 2rem;
+                line-height: 2.2rem;
+                word-break: break-word;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+                line-height: 1.2rem;
+                word-break: break-word;
+                
+            }
+
+            .fc-cards {
+                max-width: 12rem;
+            }
+        }
+
+        @media (max-width: 30rem) {
+            .navbar {
+                flex-direction: column;
+                height: auto;
+                padding: 1rem;
+            }
+
+            .navlinks {
+                flex-direction: column;
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+
+            title {
+                font-size: 1.5rem;
+                line-height: 1.8rem;
+                word-break: break-word;
+            }
+
+        .subtitle {
+            font-size: 0.8rem;
+            line-height: 1rem;
+            word-break: break-word;
+        }
+            
+
+            #mbappe {
+                max-width: 12rem;
+            }
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1 id="fcmobile">FC MOBILE</h1>
+        <div class="navlinks">
+            <h2 class="nav-link">HOME</h2>
+            <h2 class="nav-link">FEATURES</h2>
+            <h2 class="nav-link">EVENTS</h2>
+        </div>
+    </div>
+
+    <div class="hero-content">
+        <h1 class="title">WELCOME TO FC MOBILE</h1>
+        <p class="subtitle">Enjoy thrilling gameplay experience of football from FC Mobile.</p>
+        <a href="#" class="build-team-btn">Build Your Team Now</a>
+        <div class="fc-cards-container">
+            <img class="fc-cards" src="C. Ronaldo_fc25_download.png" alt="Ronaldo FC CARD">
+            <img class="fc-cards" src="Cruyff_fc25_download.png" alt="Cruyff FC CARD">
+            <img class="fc-cards" src="Messi_fc25_download.png" alt="Messi FC CARD">
+        </div>
+        <img id="mbappe" src="mbappe.png" alt="mbappe image">
+    </div>
+</body>
+</html>
