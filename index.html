@@ -272,6 +272,73 @@
             margin-right: 0.8rem;
         }
 
+        .stats-section {
+            padding: 4rem 2rem;
+            /* background: var(--primary-darkblue); */
+            background: linear-gradient(30deg,var(--primary-black) 10%,var(--primary-darkblue) 80%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .stats-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .stats-title:hover {
+            color: var(--red);
+            animation: glitch 0.8s infinite;
+        }
+
+        .stats-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .stats-subtitle:hover {
+            animation: fadeIn 1.2s ease forwards;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: var(--primary-black);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            min-width: 12rem;
+            transition: var(--transition-standard);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-0.5rem);
+           
+        }
+
+        .stat-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .stat-card p {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--red);
+        }
+
+        .stat-card small {
+            font-size: 0.9rem;
+            color: var(--white);
+            opacity: 0.7;
+        }
+
        @media (max-width: 48rem) {
     .title {
         font-size: 2.5rem;
@@ -306,11 +373,23 @@
         margin: 0.5rem;
     }
     .hero-content {
-        padding-top: 12rem;
+        padding-top: 9rem;
     }
 
     .download-btn i {
         font-size: 1.8rem;
+    }
+
+    .stats-title {
+        font-size: 2rem;
+    }
+
+    .stats-subtitle {
+        font-size: 1rem;
+    }
+
+    .stat-card {
+        min-width: 10rem;
     }
 }
 
@@ -329,7 +408,7 @@
 
     .hero-content {
         padding: 8rem 1rem 2rem;
-        padding-top: 15rem;
+        padding-top: 12rem;
    
     }
 
@@ -373,6 +452,19 @@
 
     .download-btn i {
         font-size: 1.6rem;
+    }
+
+     .stats-title {
+                font-size: 1.8rem;
+            }
+
+    .stats-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .stat-card {
+        min-width: 8rem;
+        padding: 1rem;
     }
 }
 
@@ -418,11 +510,23 @@
     }
 
     .hero-content {
-        padding-top: 18rem;
+        padding-top: 15rem;
     }
 
     .download-btn i {
         font-size: 1.4rem;
+    }
+
+     .stats-title {
+        font-size: 1.5rem;
+    }
+
+    .stats-subtitle {
+        font-size: 0.8rem;
+    }
+
+    .stat-card {
+        min-width: 7rem;
     }
 }
         
@@ -450,8 +554,33 @@
             <img class="fc-cards" src="Messi_fc25_download.png" alt="Messi FC CARD" draggable="true">
         </div>
         <a href="#" class="build-team-btn">Check the upcoming FEATURES of fc mobile</a>
-        <a href="https://apps.apple.com/us/app/ea-sports-fc-mobile-soccer/id1094930513" target="_blank" class="download-btn"><i class="fab fa-apple"></i> DOWNLOAD FC MOBILE ON APPLE STORE</a>
-        <a href="https://play.google.com/store/apps/details?id=com.ea.gp.fifamobile&pli=1" target="_blank" class="download-btn"><i class="fab fa-google-play"></i> GET FC MOBILE ON PLAY STORE</a>
+     
+        <a href="https://apps.apple.com/us/app/ea-sports-fc-mobile-soccer/id1094930513" target="_blank" class="download-btn"><i class="fab fa-google-play"></i> GET FC MOBILE ON PLAY STORE</a>
+        <a href="https://play.google.com/store/apps/details?id=com.ea.gp.fifamobile&pli=1" target="_blank" class="download-btn"><i class="fab fa-apple"></i>DOWNLOAD FC MOBILE ON APPLE STORE</a>
+    </div>
+
+
+ 
+    <div class="stats-section">
+        <h2 class="stats-title">FC Mobile Global Impact</h2>
+        <p class="stats-subtitle">Explore the massive reach of EA Sports FC Mobile worldwide.</p>
+        <div class="stats-container">
+            <div class="stat-card">
+                <h3>Total Downloads</h3>
+                <p>500M+</p>
+                <small>Estimated across iOS and Android platforms</small>
+            </div>
+            <div class="stat-card">
+                <h3>Monthly Active Users</h3>
+                <p>8M+</p>
+                <small>Players actively playing monthly</small>
+            </div>
+            <div class="stat-card">
+                <h3>Daily Active Users</h3>
+                <p>200K+</p>
+                <small>Players actively playing daily</small>
+            </div>
+        </div>
     </div>
 
 
@@ -581,5 +710,3 @@
     </script>
 </body>
 </html>
-
-
