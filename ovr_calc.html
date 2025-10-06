@@ -481,10 +481,12 @@
 
 <script>
 // Function to enforce limits on input
+// Function to enforce limits on input
 function enforceLimits(input, min, max) {
     let value = parseInt(input.value);
     
     if (isNaN(value) || input.value === '') {
+        input.value = '';
         return;
     }
     
@@ -495,48 +497,21 @@ function enforceLimits(input, min, max) {
     }
 }
 
-// Add event listeners for both inputs
-document.getElementById('numPlayers').addEventListener('input', function() {
-    enforceLimits(this, 11, 18);
-});
-
-document.getElementById('targetOvr').addEventListener('input', function() {
-    enforceLimits(this, 0, 55);
-});
-
-// Prevent pasting invalid values
-document.getElementById('numPlayers').addEventListener('paste', function(e) {
-    setTimeout(() => {
-        enforceLimits(this, 11, 18);
-    }, 1);
-});
-
-document.getElementById('targetOvr').addEventListener('paste', function(e) {
-    setTimeout(() => {
-        enforceLimits(this, 0, 55);
-    }, 1);
-});
-
-// Prevent typing non-numeric characters
-document.getElementById('numPlayers').addEventListener('keypress', function(e) {
-    if (!/[0-9]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-        e.preventDefault();
-    }
-});
-
-document.getElementById('targetOvr').addEventListener('keypress', function(e) {
-    if (!/[0-9]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-        e.preventDefault();
-    }
-});
-
-let typingTimeout;
-
-// Function to enforce limits with delay for numPlayers
+// Function to calculate OVR
 function calculateOVR() {
-    const baseOvr = parseInt(document.getElementById('playerRatings').value);
-    const rankupOvr = parseInt(document.getElementById('targetOvr').value) || 0;
-    const numPlayers = parseInt(document.getElementById('numPlayers').value) || 11;
+    const numPlayersInput = document.getElementById('numPlayers');
+    const playerRatingsInput = document.getElementById('playerRatings');
+    const targetOvrInput = document.getElementById('targetOvr');
+    
+    let baseOvr = parseInt(playerRatingsInput.value);
+    let rankupOvr = parseInt(targetOvrInput.value) || 0;
+    let numPlayers = parseInt(numPlayersInput.value) || 11;
+    
+    // Handle comma-separated values for playerRatings if needed
+    if (playerRatingsInput.value.includes(',')) {
+        const ratings = playerRatingsInput.value.split(',').map(Number).filter(n => !isNaN(n));
+        baseOvr = ratings.reduce((sum, rating) => sum + rating, 0);
+    }
     
     if (isNaN(baseOvr) || baseOvr <= 0) {
         // Clear results if no valid base OVR
@@ -553,12 +528,12 @@ function calculateOVR() {
     const totalOvr = baseOvrCalculated + rankupOvrCalculated;
     
     // Calculate minimum additional base OVR needed for +1 total OVR
-    const baseThreshold = baseOvrCalculated * 11; // Current ceiling for base OVR
-    const baseNeededFor1More = baseThreshold - baseOvr + 1; // Minimum to reach next ceiling
+    const baseThreshold = baseOvrCalculated * 11;
+    const baseNeededFor1More = baseThreshold - baseOvr + 1;
     
     // Calculate minimum additional rankup OVR needed for +1 total OVR
-    const rankupThreshold = rankupOvrCalculated * 11; // Current ceiling for rankup OVR
-    const rankupNeededFor1More = rankupThreshold - rankupOvr + 1; // Minimum to reach next ceiling
+    const rankupThreshold = rankupOvrCalculated * 11;
+    const rankupNeededFor1More = rankupThreshold - rankupOvr + 1;
     
     // Remove existing result if any
     const existingResult = document.querySelector('.result-display');
@@ -599,32 +574,56 @@ function calculateOVR() {
     document.querySelector('.ovr-calculator').appendChild(resultDiv);
 }
 
-// Add event listeners with auto-calculation
+// Add event listeners for auto-calculation
 document.getElementById('numPlayers').addEventListener('input', function() {
-    enforceNumPlayersLimits(this);
-});
-
-document.getElementById('targetOvr').addEventListener('input', function() {
-    enforceTargetOvrLimits(this);
-});
-
-document.getElementById('playerRatings').addEventListener('input', function() {
-    calculateOVR(); // Auto-calculate when base OVR changes
-});
-
-// Clear timeout when user focuses out
-document.getElementById('numPlayers').addEventListener('blur', function() {
-    clearTimeout(typingTimeout);
-    let value = parseInt(this.value);
-    if (!isNaN(value) && value < 11) {
-        this.value = 11;
-    } else if (!isNaN(value) && value > 18) {
-        this.value = 18;
-    }
+    enforceLimits(this, 11, 18);
     calculateOVR();
 });
 
-// Calculate OVR button (now just triggers the same function)
+document.getElementById('targetOvr').addEventListener('input', function() {
+    enforceLimits(this, 0, 55);
+    calculateOVR();
+});
+
+document.getElementById('playerRatings').addEventListener('input', function() {
+    calculateOVR();
+});
+
+// Prevent pasting invalid values
+document.getElementById('numPlayers').addEventListener('paste', function(e) {
+    setTimeout(() => {
+        enforceLimits(this, 11, 18);
+        calculateOVR();
+    }, 1);
+});
+
+document.getElementById('targetOvr').addEventListener('paste', function(e) {
+    setTimeout(() => {
+        enforceLimits(this, 0, 55);
+        calculateOVR();
+    }, 1);
+});
+
+// Prevent typing non-numeric characters
+document.getElementById('numPlayers').addEventListener('keypress', function(e) {
+    if (!/[0-9]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+        e.preventDefault();
+    }
+});
+
+document.getElementById('targetOvr').addEventListener('keypress', function(e) {
+    if (!/[0-9]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+        e.preventDefault();
+    }
+});
+
+document.getElementById('playerRatings').addEventListener('keypress', function(e) {
+    if (!/[0-9,]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+        e.preventDefault();
+    }
+});
+
+// Calculate OVR button
 document.querySelector('.calculate-btn').addEventListener('click', function() {
     calculateOVR();
 });
