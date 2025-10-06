@@ -533,42 +533,6 @@ document.getElementById('targetOvr').addEventListener('keypress', function(e) {
 let typingTimeout;
 
 // Function to enforce limits with delay for numPlayers
-function enforceNumPlayersLimits(input) {
-    clearTimeout(typingTimeout);
-    
-    typingTimeout = setTimeout(() => {
-        let value = parseInt(input.value);
-        
-        if (isNaN(value) || input.value === '') {
-            return;
-        }
-        
-        if (value < 11) {
-            input.value = 11;
-        } else if (value > 18) {
-            input.value = 18;
-        }
-        calculateOVR(); // Auto-calculate when value changes
-    }, 1000);
-}
-
-// Function to enforce limits immediately for targetOvr
-function enforceTargetOvrLimits(input) {
-    let value = parseInt(input.value);
-    
-    if (isNaN(value) || input.value === '') {
-        return;
-    }
-    
-    if (value < 0) {
-        input.value = 0;
-    } else if (value > 55) {
-        input.value = 55;
-    }
-    calculateOVR(); // Auto-calculate when value changes
-}
-
-// Function to calculate and display OVR
 function calculateOVR() {
     const baseOvr = parseInt(document.getElementById('playerRatings').value);
     const rankupOvr = parseInt(document.getElementById('targetOvr').value) || 0;
@@ -588,12 +552,13 @@ function calculateOVR() {
     const rankupOvrCalculated = Math.ceil(rankupOvr / 11);
     const totalOvr = baseOvrCalculated + rankupOvrCalculated;
     
-    // Calculate how much needed for +1 OVR (considering player count)
-    const currentBaseTotal = baseOvrCalculated * 11;
-    const baseNeededFor1More = (currentBaseTotal + 11) - baseOvr;
+    // Calculate minimum additional base OVR needed for +1 total OVR
+    const baseThreshold = baseOvrCalculated * 11; // Current ceiling for base OVR
+    const baseNeededFor1More = baseThreshold - baseOvr + 1; // Minimum to reach next ceiling
     
-    const currentRankupTotal = rankupOvrCalculated * 11;
-    const rankupNeededFor1More = (currentRankupTotal + 11) - rankupOvr;
+    // Calculate minimum additional rankup OVR needed for +1 total OVR
+    const rankupThreshold = rankupOvrCalculated * 11; // Current ceiling for rankup OVR
+    const rankupNeededFor1More = rankupThreshold - rankupOvr + 1; // Minimum to reach next ceiling
     
     // Remove existing result if any
     const existingResult = document.querySelector('.result-display');
