@@ -523,16 +523,16 @@ function calculateOVR() {
     }
     
     // Calculate: (base ovr / 11) rounded up + (rankup ovr / 11) rounded up
-    const baseOvrCalculated = Math.ceil(baseOvr / 11);
-    const rankupOvrCalculated = Math.ceil(rankupOvr / 11);
+    const baseOvrCalculated = Math.ceil(baseOvr / numPlayers);
+    const rankupOvrCalculated = Math.ceil(rankupOvr / numPlayers);
     const totalOvr = baseOvrCalculated + rankupOvrCalculated;
     
     // Calculate minimum additional base OVR needed for +1 total OVR
-    const baseThreshold = baseOvrCalculated * 11;
+    const baseThreshold = baseOvrCalculated * numPlayers;
     const baseNeededFor1More = baseThreshold - baseOvr + 1;
     
     // Calculate minimum additional rankup OVR needed for +1 total OVR
-    const rankupThreshold = rankupOvrCalculated * 11;
+    const rankupThreshold = rankupOvrCalculated * numPlayers;
     const rankupNeededFor1More = rankupThreshold - rankupOvr + 1;
     
     // Remove existing result if any
