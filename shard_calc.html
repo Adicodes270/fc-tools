@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FEATURES | FC MOBILE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+</head>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FEATURES | FC MOBILE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    :root {
+        --solid-black: #000000;
+        --primary-black: #020024;
+        --secondary-black: #03081C;
+        --primary-darkblue: #102782;
+        --white: #fff;
+        --primary-lightblue: #2B2DD8;
+        --accent-blue: #4A90E2;
+        --bright-blue: #007AFF;
+        --electric-blue: #00D4FF;
+        --purple: #6366F1;
+        --red: #ff0000;
+        --transition-standard: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --glass-bg: rgba(255, 255, 255, 0.1);
+        --glass-border: rgba(255, 255, 255, 0.2);
+    }
+
+    html {
+        scroll-behavior: smooth;
+        font-size: 100%;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        position: relative;
+        min-height: 100vh;
+        overflow-x: hidden;
+        background: linear-gradient(135deg, 
+            var(--solid-black) 0%,
+            var(--primary-black) 25%,
+            var(--secondary-black) 50%,
+            var(--primary-darkblue) 75%,
+            var(--primary-lightblue) 100%);
+        user-select: none;
+    }
+
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+            radial-gradient(circle at 20% 80%, rgba(43, 45, 216, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.2) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+        z-index: -1;
+        animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) scale(1); }
+        50% { transform: translateY(-20px) scale(1.05); }
+    }
+
+    body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 98px,
+            rgba(43, 45, 216, 0.03) 100px
+        );
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    .navbar {
+        background: linear-gradient(30deg, 
+            rgba(0, 0, 0, 0.9) 20%, 
+            rgba(2, 0, 36, 0.9) 81%);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--glass-border);
+        height: 5rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1.5rem;
+        position: fixed;
+        top: 0;
+        z-index: 10;
+    }
+
+    #fcmobile {
+        color: var(--white);
+        font-size: 2rem;
+        cursor: pointer;
+        font-weight: 900;
+        white-space: nowrap;
+        text-shadow: 0 0 20px rgba(43, 45, 216, 0.7);
+    }
+
+    .navlinks {
+        display: flex;
+        gap: 1.2rem;
+        color: var(--white);
+        font-size: 1rem;
+        font-weight: 400;
+    }
+
+    #fcmobile:hover {
+        transform: translateX(0.5rem) scale(1.05);
+        transition: var(--transition-standard);
+        text-shadow: 0 0 30px rgba(43, 45, 216, 1);
+    }
+
+    .nav-link {
+            position: relative;
+            padding-bottom: 0.25rem;
+            transition: var(--transition-standard);
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--red);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+            .nav-link:hover::after {
+                transform: scaleX(1);
+                transform-origin: left;
+            }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    a:visited {
+        color: inherit;
+    }
+
+    .nav-item {
+        position: relative;
+    }
+
+
+    .dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: linear-gradient(30deg, var(--solid-black) 20%, var(--primary-black) 81%);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        min-width: 180px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: var(--transition-standard);
+        z-index: 100;
+        margin-top: 10px;
+        }
+
+        .nav-item:hover .dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        }
+
+        .dropdown-item {
+        display: block;
+        padding: 12px 16px;
+        color: var(--white);
+        text-decoration: none;
+        transition: var(--transition-standard);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .dropdown-item:last-child {
+        border-bottom: none;
+        border-radius: 0 0 8px 8px;
+        }
+
+        .dropdown-item:first-child {
+        border-radius: 8px 8px 0 0;
+        }
+
+        .dropdown-item:hover {
+        background: rgba(43, 45, 216, 0.2);
+        color: var(--white);
+        padding-left: 20px;
+        }
+
+        .dropdown-item i {
+        margin-right: 8px;
+        font-size: 0.9rem;
+        }
+
+        .main-content {
+        margin-top: 5rem;
+        padding: 2rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: calc(100vh - 5rem);
+    }
+
+    .page-title {
+        font-size: 3rem;
+        font-weight: 900;
+        color: var(--white);
+        text-align: center;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, var(--white), var(--electric-blue), var(--purple));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 0 30px rgba(43, 45, 216, 0.5);
+    }
+
+    .page-title:hover {
+        transform: translateY(-2px);
+        text-shadow: 
+            0 0 1.5rem rgba(0, 212, 255, 0.6),
+            0 0 2rem rgba(43, 45, 216, 0.4);
+    }
+
+    .page-subtitle {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+        margin-bottom: 3rem;
+        font-weight: 300;
+    }
+
+   .page-subtitle:hover {
+        color: var(--white);
+        text-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+        letter-spacing: 0.5px;
+    }
+
+    
+
+
+    .ovr-calculator {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        padding: 2rem;
+        max-width: 500px;
+        width: 100%;
+        box-shadow: 
+            0 20px 40px rgba(0, 0, 0, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ovr-calculator::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+            transparent, 
+            rgba(255, 255, 255, 0.1), 
+            transparent);
+        animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+
+    .calculator-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--white);
+        text-align: center;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 0 10px rgba(43, 45, 216, 0.7);
+    }
+
+    .input-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .input-label {
+        display: block;
+        color: var(--white);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .input-field {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 2px solid var(--glass-border);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--white);
+        font-size: 1rem;
+        font-family: 'Poppins', sans-serif;
+        transition: var(--transition-standard);
+        backdrop-filter: blur(10px);
+    }
+
+    .input-field:focus {
+        outline: none;
+        border-color: var(--electric-blue);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .input-field::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .calculate-btn {
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(45deg, var(--primary-lightblue), var(--electric-blue));
+        border: none;
+        border-radius: 10px;
+        color: var(--white);
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: var(--transition-standard);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 10px 20px rgba(43, 45, 216, 0.3);
+    }
+
+    .calculate-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 30px rgba(43, 45, 216, 0.4);
+        background: linear-gradient(45deg, var(--electric-blue), var(--purple));
+    }
+
+    .calculate-btn:active {
+        transform: translateY(0);
+    }
+
+    .results-section {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--glass-border);
+    }
+
+    .shard-ovr{
+        font-size: 2rem;
+        font-weight: 900;
+        color: var(--white);
+        text-align: center;
+        margin-bottom: 1rem;
+        background: linear-gradient(60deg, var(--white), var(--electric-blue));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+ 
+    
+
+    @media (max-width: 48rem) {
+        .navlinks {
+            gap: 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        #fcmobile {
+            font-size: 1.5rem;
+        }
+
+        .page-title {
+            font-size: 2.2rem;
+        }
+
+        .ovr-calculator {
+            margin: 0 1rem;
+            padding: 1.5rem;
+        }
+
+        .main-content {
+            padding: 1rem;
+        }
+    }
+
+    
+
+    @media (max-width: 30rem) {
+       .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+        justify-content: center; 
+        text-align: center; 
+    }
+
+    #fcmobile {
+        margin-bottom: 0.5rem;  
+    }
+
+    .navlinks {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-top: 1rem;
+    }
+
+    .main-content{
+        padding-top: 10rem;
+    }
+
+    
+      }
+
+    @media (max-width: 64rem) {
+    .navbar {
+        padding: 0 1rem;
+        gap: 0.5rem;
+    }
+
+    #fcmobile {
+        font-size: 1.7rem;
+    }
+
+    .navlinks {
+        gap: 0.8rem;
+        font-size: 0.9rem;
+    }
+
+}
+
+    @media (max-width: 24rem) {
+    .navbar {
+        padding: 0.5rem;
+    }
+
+    #fcmobile {
+        font-size: 1.5rem;
+    }
+
+    .navlinks {
+        font-size: 0.9rem;
+    }
+
+    
+
+
+}
+
+
+
+
+</style>
+
+<body>
+    <div class="navbar">
+    <h1 id="fcmobile">FC MOBILE</h1>
+    <div class="navlinks">
+        <a href="index.html"><h2 class="nav-link">HOME</h2></a>
+        
+        <div class="nav-item">
+            <h2 class="nav-link">TOOLS</h2>
+            <div class="dropdown">
+                <a href="ovr_calc.html" class="dropdown-item">
+                    <i class="fas fa-calculator"></i>OVR Calculator
+                </a>
+                <a href="shard_calc.html" class="dropdown-item">
+                    <i class="fa-solid fa-puzzle-piece"></i>Shard Calculator
+                </a>
+            </div>
+        </div>
+        
+        <h2 class="nav-link">EVENTS</h2>
+    </div>
+</div>
+
+<div class="main-content">
+        <h1 class="page-title">SHARD CALCULATOR</h1>
+        <p class="page-subtitle">Calculate how many shards you can get by exchanging your players</p>
+
+        <div class="ovr-calculator">
+            <h2 class="calculator-title"></h2>
+            <div class="input-group">
+                <h2 class = "shard-ovr">106-108(10 SHARDS EACH)</h2>
+                <label for="106-108" class="input-label"></label>
+                <input type="number" id="numShards" class="input-field" placeholder="Enter the number of 106-108 players you have each for 10 shards">
+            </div>
+
+            <div class="input-group">
+                <h2 class = "shard-ovr">109(30 SHARDS EACH)</h2>
+                <label for="109" class="input-label"></label>
+                <input type="number" id="numShards" class="input-field" placeholder="Enter the number of 109 players you have each for 30 shards">
+            </div>
+
+           <div class="input-group">
+                <h2 class = "shard-ovr">110(60 SHARDS EACH)</h2>
+                <label for="110" class="input-label"></label>
+                <input type="number" id="numShards"class="input-field" placeholder="Enter the number of 110 players you have each for 60 shards">
+            </div>
+
+
+             <div class="input-group">
+                <h2 class = "shard-ovr">111(120 SHARDS EACH)</h2>
+                <label for="111" class="input-label"></label>
+                <input type="number" id="numShards" class="input-field" placeholder="Enter the number of 111 players you have each for 120 shards">
+            </div>
+
+             <div class="input-group">
+                <h2 class = "shard-ovr">112(180 SHARDS EACH)</h2>
+                <label for="112" class="input-label"></label>
+                <input type="number" id="numShards" class="input-field" placeholder="Enter the number of 112 players you have each for 180 shards">
+            </div>
+
+             <div class="input-group">
+                <h2 class = "shard-ovr">113(250 SHARDS EACH)</h2>
+                <label for="113" class="input-label"></label>
+                <input type="number" id="numShards" class="input-field" placeholder="Enter the number of 113 players you have each for 250 shards">
+            </div>
+
+
+           <button class="calculate-btn" onclick="calculateShards()">
+                <i class="fas fa-calculator"></i> Calculate Shards
+            </button>
+
+            <div id="resultDiv"></div>
+
+            
+            </div>
+        </div>
+
+<script>
+function calculateShards() {
+    const inputs = document.querySelectorAll('#numShards');
+    
+    const num106_108 = parseFloat(inputs[0].value) || 0;
+    const num109 = parseFloat(inputs[1].value) || 0;
+    const num110 = parseFloat(inputs[2].value) || 0;
+    const num111 = parseFloat(inputs[3].value) || 0;
+    const num112 = parseFloat(inputs[4].value) || 0;
+    const num113 = parseFloat(inputs[5].value) || 0;
+    
+    const shards106_108 = num106_108 * 10;
+    const shards109 = num109 * 30;
+    const shards110 = num110 * 60;
+    const shards111 = num111 * 120;
+    const shards112 = num112 * 180;
+    const shards113 = num113 * 250;
+    
+    const totalShards = shards106_108 + shards109 + shards110 + shards111 + shards112 + shards113;
+    
+    const resultDiv = document.getElementById('resultDiv');
+    resultDiv.innerHTML = `
+        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 15px; text-align: center; backdrop-filter: blur(20px);">
+            <h3 style="color: #fff; margin-bottom: 1rem; font-size: 1.2rem;">Total Shards</h3>
+            <div style="color: #00D4FF; font-size: 2.5rem; font-weight: 700; text-shadow: 0 0 10px rgba(0, 212, 255, 0.5); margin-bottom: 1rem;">
+                ${totalShards}
+            </div>
+            <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                Shards from ${num106_108 + num109 + num110 + num111 + num112 + num113} players
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.8rem; margin-top: 1rem;">
+                ${shards106_108 > 0 ? `
+                <div style="padding: 0.8rem; background: rgba(43, 45, 216, 0.2); border-radius: 10px; border: 1px solid rgba(43, 45, 216, 0.3);">
+                    <div style="color: #fff; font-weight: 600; margin-bottom: 0.3rem; font-size: 0.85rem;">106-108</div>
+                    <div style="color: #00D4FF; font-size: 1.1rem; font-weight: 700;">${shards106_108}</div>
+                </div>` : ''}
+                
+                ${shards109 > 0 ? `
+                <div style="padding: 0.8rem; background: rgba(99, 102, 241, 0.2); border-radius: 10px; border: 1px solid rgba(99, 102, 241, 0.3);">
+                    <div style="color: #fff; font-weight: 600; margin-bottom: 0.3rem; font-size: 0.85rem;">109</div>
+                    <div style="color: #6366F1; font-size: 1.1rem; font-weight: 700;">${shards109}</div>
+                </div>` : ''}
+                
+                ${shards110 > 0 ? `
+                <div style="padding: 0.8rem; background: rgba(0, 212, 255, 0.2); border-radius: 10px; border: 1px solid rgba(0, 212, 255, 0.3);">
+                    <div style="color: #fff; font-weight: 600; margin-bottom: 0.3rem; font-size: 0.85rem;">110</div>
+                    <div style="color: #00D4FF; font-size: 1.1rem; font-weight: 700;">${shards110}</div>
+                </div>` : ''}
+                
+                ${shards111 > 0 ? `
+                <div style="padding: 0.8rem; background: rgba(74, 144, 226, 0.2); border-radius: 10px; border: 1px solid rgba(74, 144, 226, 0.3);">
+                    <div style="color: #fff; font-weight: 600; margin-bottom: 0.3rem; font-size: 0.85rem;">111</div>
+                    <div style="color: #4A90E2; font-size: 1.1rem; font-weight: 700;">${shards111}</div>
+                </div>` : ''}
+                
+                ${shards112 > 0 ? `
+                <div style="padding: 0.8rem; background: rgba(43, 45, 216, 0.2); border-radius: 10px; border: 1px solid rgba(43, 45, 216, 0.3);">
+                    <div style="color: #fff; font-weight: 600; margin-bottom: 0.3rem; font-size: 0.85rem;">112</div>
+                    <div style="color: #2B2DD8; font-size: 1.1rem; font-weight: 700;">${shards112}</div>
+                </div>` : ''}
+                
+                ${shards113 > 0 ? `
+                <div style="padding: 0.8rem; background: rgba(99, 102, 241, 0.2); border-radius: 10px; border: 1px solid rgba(99, 102, 241, 0.3);">
+                    <div style="color: #fff; font-weight: 600; margin-bottom: 0.3rem; font-size: 0.85rem;">113</div>
+                    <div style="color: #6366F1; font-size: 1.1rem; font-weight: 700;">${shards113}</div>
+                </div>` : ''}
+            </div>
+        </div>
+    `;
+}
+</script>
+</body>
